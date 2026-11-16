@@ -6,10 +6,12 @@ interface Props {
   t: Dict;
 }
 const { t } = Astro.props;
-const b = t.blocks;
+const P = t.projects;
+const L = P.labels;
 const GITHUB = 'https://github.com/macfadem';
 const LINKEDIN = 'https://www.linkedin.com/in/macfadem/';
-const EMAIL = 'kevinamm96@gmail.com';
+const EMAIL = 'k_macfadem@hotmail.com';
+const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
 <Base t={t}>
@@ -17,9 +19,8 @@ const EMAIL = 'kevinamm96@gmail.com';
 
   <header class="top wrap">
     <a class="brand" href={t.path}>kevin macfadem</a>
-    <nav aria-label={t.lang === 'en' ? 'Main' : 'Principal'}>
-      <a href="#projetos">{t.nav.blocks}</a>
-      <a href="#casos">{t.nav.cases}</a>
+    <nav aria-label={t.nav.main}>
+      <a href="#projetos">{t.nav.projects}</a>
       <a href="#experiencia">{t.nav.experience}</a>
       <a href="#sobre">{t.nav.about}</a>
       <a href="#contato">{t.nav.contact}</a>
@@ -36,7 +37,7 @@ const EMAIL = 'kevinamm96@gmail.com';
           <p class="lead">{t.hero.lead}</p>
           <div class="cta">
             <a class="btn solid" href="#projetos">{t.hero.cta}</a>
-            <a class="btn" href={GITHUB}>{t.hero.cta2}</a>
+            <a class="btn" href={t.cv}>{t.hero.cta2}</a>
           </div>
         </div>
       </div>
@@ -79,138 +80,138 @@ const EMAIL = 'kevinamm96@gmail.com';
     </section>
 
     <section id="projetos" class="section wrap">
-      <p class="kicker">{b.kicker}</p>
-      <h2>{b.title}</h2>
-      <p class="section-lead">{b.lead}</p>
+      <p class="kicker">{P.kicker}</p>
+      <h2>{P.title}</h2>
+      <p class="section-lead">{P.lead}</p>
 
-      <div class="bento">
-        <article class="tile t-asc" data-asc>
-          <div>
-            <p class="tag">{b.asc.tag}</p>
-            <h3>{b.asc.title}</h3>
-          </div>
-          <div class="steps" role="tablist" aria-label={b.asc.tag}>
-            {
-              b.asc.steps.map((s, i) => (
-                <button type="button" role="tab" id={`asc-tab-${i}`} aria-controls="asc-panel" aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-text={s.t}>
-                  <span class="dot" />
-                  {s.k}
-                </button>
-              ))
-            }
-          </div>
-          <p class="step-text" id="asc-panel" role="tabpanel" aria-labelledby="asc-tab-0" aria-live="polite">{b.asc.steps[0].t}</p>
-          <a class="tile-link" href="#caso-asc">{b.xray.link} →</a>
-        </article>
-
-        <article class="tile t-xray">
-          <div>
-            <p class="tag">{b.xray.tag}</p>
-            <h3>{b.xray.title}</h3>
-            <p>{b.xray.body}</p>
-          </div>
-          <div class="xray-metric">
-            <span class="big">{b.xray.metric}</span>
-            <span class="small">{b.xray.metricLabel}</span>
-          </div>
-          <p class="soon">{b.xray.soon}</p>
-          <a class="tile-link" href="#caso-raiox">{b.xray.link} →</a>
-        </article>
-
-        <article class="tile t-cofrinho" data-cofrinho data-items={JSON.stringify(b.cofrinho.items)} data-week={b.cofrinho.week} data-lang={t.lang}>
-          <div>
-            <p class="tag">{b.cofrinho.tag}</p>
-            <h3>{b.cofrinho.title}</h3>
-          </div>
-          <ul class="fila" data-fila>
-            {
-              b.cofrinho.items.map((it) => (
-                <li>
-                  <div class="fila-row">
-                    <span>{it.name}</span>
-                    <span class="mono" data-when></span>
-                  </div>
-                  <div class="fila-bar">
-                    <span data-bar />
-                  </div>
-                </li>
-              ))
-            }
-          </ul>
-          <div class="aporte">
-            <label for="aporte">{b.cofrinho.label}: <strong data-aporte></strong></label>
-            <input id="aporte" type="range" min="20" max="300" step="10" value="100" />
-            <p class="note">{b.cofrinho.note}</p>
-          </div>
-        </article>
-
-        <article class="tile t-moo">
-          <video class="moo-video" src="/media/mooluscos.mp4" poster="/media/mooluscos.webp" muted loop playsinline preload="none" data-autoplay aria-label={b.moo.title}></video>
-          <div class="moo-text">
-            <p class="tag">{b.moo.tag}</p>
-            <h3>{b.moo.title}</h3>
-            <p>{b.moo.body}</p>
-            <a class="tile-link" href="https://mooluscos-filmes.vercel.app/" rel="noopener">{b.moo.link} ↗</a>
-          </div>
-        </article>
-
-        <article class="tile t-small">
-          <p class="tag">{b.reactify.tag}</p>
-          <h3>{b.reactify.title}</h3>
-          <p>{b.reactify.body}</p>
-          <a class="tile-link" href={`${GITHUB}/Reactify`}>{b.reactify.link} ↗</a>
-        </article>
-
-        <article class="tile t-small">
-          <p class="tag">{b.educa.tag}</p>
-          <h3>{b.educa.title}</h3>
-          <p>{b.educa.body}</p>
-          <a class="tile-link" href={`${GITHUB}/EducaTech`}>{b.educa.link} ↗</a>
-        </article>
-      </div>
-    </section>
-
-    <section id="casos" class="section wrap">
-      <p class="kicker">{t.cases.kicker}</p>
-      <h2>{t.cases.title}</h2>
-      <div class="cases">
+      <div class="projects">
         {
-          t.cases.items.map((c) => (
-            <article class="case" id={c.id}>
-              <header>
-                <span class="n">{c.n}</span>
-                <div>
-                  <h3>{c.title}</h3>
-                  <p class="sub">{c.sub}</p>
-                </div>
+          P.main.map((p, i) => (
+            <article class={`project w-${p.widget}`} id={p.id}>
+              <header class="project-head">
+                <p class="tag">
+                  <span class="num">{L.project} {pad(i + 1)}</span> · {p.kind}
+                </p>
+                <h3>{p.name}</h3>
+                <p class="sub">{p.sub}</p>
               </header>
-              <dl>
-                <div>
-                  <dt>{t.cases.labels.problem}</dt>
-                  <dd>{c.problem}</dd>
-                </div>
-                <div>
-                  <dt>{t.cases.labels.decisions}</dt>
-                  <dd>
-                    <ul>
-                      {c.decisions.map((d) => <li>{d}</li>)}
+
+              <figure class="media">
+                {p.media.video ? (
+                  <video src={p.media.video} poster={p.media.image} muted loop playsinline preload="none" data-autoplay aria-label={p.media.alt} />
+                ) : (
+                  <img src={p.media.image} alt={p.media.alt} loading="lazy" decoding="async" />
+                )}
+                <figcaption>{p.media.caption}</figcaption>
+              </figure>
+
+              <div class="widget">
+                <p class="tag">{p.widget === 'xray' ? L.result : L.tryIt}</p>
+                {p.widget === 'asc' && (
+                  <div data-asc>
+                    <h4>{P.asc.title}</h4>
+                    <div class="steps" role="tablist" aria-label={P.asc.title}>
+                      {P.asc.steps.map((s, k) => (
+                        <button type="button" role="tab" id={`asc-tab-${k}`} aria-controls="asc-panel" aria-selected={k === 0 ? 'true' : 'false'} tabindex={k === 0 ? 0 : -1} data-text={s.t}>
+                          <span class="dot" />
+                          {s.k}
+                        </button>
+                      ))}
+                    </div>
+                    <p class="step-text" id="asc-panel" role="tabpanel" aria-labelledby="asc-tab-0" aria-live="polite">{P.asc.steps[0].t}</p>
+                  </div>
+                )}
+                {p.widget === 'xray' && (
+                  <div class="xray">
+                    <div class="xray-metric">
+                      <span class="big">{P.xray.metric}</span>
+                      <span class="small">{P.xray.metricLabel}</span>
+                    </div>
+                    <p class="small">{P.xray.classesLabel}</p>
+                    <ul class="chips">
+                      {P.xray.classes.map((c) => <li>{c}</li>)}
                     </ul>
-                  </dd>
-                </div>
-                <div>
-                  <dt>{t.cases.labels.stack}</dt>
-                  <dd class="mono">{c.stack}</dd>
-                </div>
-                <div>
-                  <dt>{t.cases.labels.status}</dt>
-                  <dd>
-                    {c.status}
-                    {c.links.map((l) => (
-                      <a class="case-link" href={l.href}>{l.label} ↗</a>
-                    ))}
-                  </dd>
-                </div>
-              </dl>
+                    <p class="soon">{P.xray.soon}</p>
+                  </div>
+                )}
+                {p.widget === 'cofrinho' && (
+                  <div data-cofrinho data-items={JSON.stringify(P.cofrinho.items)} data-week={P.cofrinho.week} data-lang={t.lang}>
+                    <h4>{P.cofrinho.title}</h4>
+                    <ul class="fila" data-fila>
+                      {P.cofrinho.items.map((it) => (
+                        <li>
+                          <div class="fila-row">
+                            <span>{it.name}</span>
+                            <span class="mono" data-when />
+                          </div>
+                          <div class="fila-bar">
+                            <span data-bar />
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    <div class="aporte">
+                      <label for="aporte">
+                        {P.cofrinho.label}: <strong data-aporte />
+                      </label>
+                      <input id="aporte" type="range" min="20" max="300" step="10" value="100" />
+                      <p class="note">{P.cofrinho.note}</p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              <details class="how">
+                <summary>{L.details}</summary>
+                <dl>
+                  <div>
+                    <dt>{L.problem}</dt>
+                    <dd>{p.problem}</dd>
+                  </div>
+                  <div>
+                    <dt>{L.decisions}</dt>
+                    <dd>
+                      <ul>
+                        {p.decisions.map((d) => <li>{d}</li>)}
+                      </ul>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>{L.stack}</dt>
+                    <dd class="mono">{p.stack}</dd>
+                  </div>
+                  <div>
+                    <dt>{L.status}</dt>
+                    <dd>{p.status}</dd>
+                  </div>
+                </dl>
+              </details>
+              {p.links.map((l) => (
+                <a class="tile-link" href={l.href}>{l.label} ↗</a>
+              ))}
+            </article>
+          ))
+        }
+      </div>
+
+      <h3 class="more">{L.more}</h3>
+      <div class="small-grid">
+        {
+          P.small.map((p, i) => (
+            <article class="card">
+              <div class={`card-media${p.name === 'Reactify' ? ' contain' : ''}`}>
+                {p.video ? (
+                  <video src={p.video} poster={p.image} muted loop playsinline preload="none" data-autoplay aria-label={p.alt} />
+                ) : (
+                  <img src={p.image} alt={p.alt} loading="lazy" decoding="async" />
+                )}
+              </div>
+              <p class="tag">
+                <span class="num">{L.project} {pad(i + 1 + P.main.length)}</span> · {p.kind}
+              </p>
+              <h4>{p.name}</h4>
+              <p>{p.body}</p>
+              <a class="tile-link" href={p.link.href} rel="noopener">{p.link.label} ↗</a>
             </article>
           ))
         }
@@ -262,6 +263,7 @@ const EMAIL = 'kevinamm96@gmail.com';
       <p class="prose">{t.contact.body}</p>
       <div class="cta">
         <a class="btn solid inv" href={`mailto:${EMAIL}`}>{t.contact.email}</a>
+        <a class="btn inv" href={t.cv}>{t.contact.cv}</a>
         <a class="btn inv" href={LINKEDIN}>LinkedIn</a>
         <a class="btn inv" href={GITHUB}>GitHub</a>
       </div>
