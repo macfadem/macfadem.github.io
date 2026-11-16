@@ -108,8 +108,8 @@ export const en: Dict = {
           'Setup for non-programmers: one command installs, creates the shortcut and opens the app.',
         ],
         stack: 'Next.js 16 · TypeScript · Tailwind · shadcn/ui · SQLite with Drizzle ORM · Vitest',
-        status: 'In daily use.',
-        links: [],
+        status: 'In daily use, with the code open.',
+        links: [{ label: 'Repository', href: 'https://github.com/macfadem/cofrinho' }],
       },
     ],
     asc: {

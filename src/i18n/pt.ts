@@ -106,8 +106,8 @@ export const pt = {
           'Instalação para quem não programa: um comando instala, cria o atalho e abre o app.',
         ],
         stack: 'Next.js 16 · TypeScript · Tailwind · shadcn/ui · SQLite com Drizzle ORM · Vitest',
-        status: 'Em uso no dia a dia.',
-        links: [] as { label: string; href: string }[],
+        status: 'Em uso no dia a dia, com código aberto.',
+        links: [{ label: 'Repositório', href: 'https://github.com/macfadem/cofrinho' }],
       },
     ],
     asc: {
