@@ -1,0 +1,360 @@
+---
+import Base from '../layouts/Base.astro';
+import type { Dict } from '../i18n/pt';
+
+interface Props {
+  t: Dict;
+}
+const { t } = Astro.props;
+const b = t.blocks;
+const GITHUB = 'https://github.com/macfadem';
+const LINKEDIN = 'https://www.linkedin.com/in/macfadem/';
+const EMAIL = 'kevinamm96@gmail.com';
+---
+
+<Base t={t}>
+  <div class="rail" aria-hidden="true"><span></span></div>
+
+  <header class="top wrap">
+    <a class="brand" href={t.path}>kevin macfadem</a>
+    <nav aria-label={t.lang === 'en' ? 'Main' : 'Principal'}>
+      <a href="#projetos">{t.nav.blocks}</a>
+      <a href="#casos">{t.nav.cases}</a>
+      <a href="#experiencia">{t.nav.experience}</a>
+      <a href="#sobre">{t.nav.about}</a>
+      <a href="#contato">{t.nav.contact}</a>
+    </nav>
+    <a class="lang" href={t.otherPath} hreflang={t.otherLabel.toLowerCase()} aria-label={t.otherAria}>{t.otherLabel}</a>
+  </header>
+
+  <main id="conteudo">
+    <section class="hero">
+      <div class="wrap">
+        <p class="eyebrow">{t.hero.eyebrow}</p>
+        <h1>{t.hero.title[0]}<br />{t.hero.title[1]}</h1>
+        <div class="hero-row">
+          <p class="lead">{t.hero.lead}</p>
+          <div class="cta">
+            <a class="btn solid" href="#projetos">{t.hero.cta}</a>
+            <a class="btn" href={GITHUB}>{t.hero.cta2}</a>
+          </div>
+        </div>
+      </div>
+
+      <svg class="line wide" viewBox="0 0 1440 260" aria-hidden="true">
+        <path
+          pathLength="1"
+          d="M0,140 L110,140 Q122,124 134,140 L150,140 L156,152 L168,50 L180,172 L188,140 L208,140 Q226,112 244,140 L290,140 Q302,124 314,140 L330,140 L336,152 L348,50 L360,172 L368,140 L388,140 Q406,112 424,140 L520,140 L520,80 L640,80 L640,200 L760,200 L760,140 L880,140 L880,80 L960,80 L960,50 C1040,160 1130,208 1440,220"
+        ></path>
+        <g>
+          <circle cx="580" cy="80" r="9"></circle>
+          <circle cx="700" cy="200" r="9"></circle>
+          <circle cx="820" cy="140" r="9"></circle>
+          <circle cx="920" cy="80" r="9"></circle>
+        </g>
+      </svg>
+      <svg class="line narrow" viewBox="0 0 390 150" aria-hidden="true">
+        <path
+          pathLength="1"
+          d="M0,80 L30,80 Q36,72 42,80 L50,80 L53,86 L60,30 L67,98 L71,80 L82,80 Q91,66 100,80 L130,80 L130,50 L190,50 L190,110 L250,110 L250,60 C290,120 330,132 390,138"
+        ></path>
+        <g>
+          <circle cx="160" cy="50" r="6"></circle>
+          <circle cx="220" cy="110" r="6"></circle>
+        </g>
+      </svg>
+
+      <ol class="stops wrap">
+        {
+          t.hero.stops.map((s) => (
+            <li>
+              <a href={s.href}>
+                <span class="k">{s.k}</span>
+                <strong>{s.t}</strong>
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section id="projetos" class="section wrap">
+      <p class="kicker">{b.kicker}</p>
+      <h2>{b.title}</h2>
+      <p class="section-lead">{b.lead}</p>
+
+      <div class="bento">
+        <article class="tile t-asc" data-asc>
+          <div>
+            <p class="tag">{b.asc.tag}</p>
+            <h3>{b.asc.title}</h3>
+          </div>
+          <div class="steps" role="tablist" aria-label={b.asc.tag}>
+            {
+              b.asc.steps.map((s, i) => (
+                <button type="button" role="tab" id={`asc-tab-${i}`} aria-controls="asc-panel" aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-text={s.t}>
+                  <span class="dot" />
+                  {s.k}
+                </button>
+              ))
+            }
+          </div>
+          <p class="step-text" id="asc-panel" role="tabpanel" aria-labelledby="asc-tab-0" aria-live="polite">{b.asc.steps[0].t}</p>
+          <a class="tile-link" href="#caso-asc">{b.xray.link} →</a>
+        </article>
+
+        <article class="tile t-xray">
+          <div>
+            <p class="tag">{b.xray.tag}</p>
+            <h3>{b.xray.title}</h3>
+            <p>{b.xray.body}</p>
+          </div>
+          <div class="xray-metric">
+            <span class="big">{b.xray.metric}</span>
+            <span class="small">{b.xray.metricLabel}</span>
+          </div>
+          <p class="soon">{b.xray.soon}</p>
+          <a class="tile-link" href="#caso-raiox">{b.xray.link} →</a>
+        </article>
+
+        <article class="tile t-cofrinho" data-cofrinho data-items={JSON.stringify(b.cofrinho.items)} data-week={b.cofrinho.week} data-lang={t.lang}>
+          <div>
+            <p class="tag">{b.cofrinho.tag}</p>
+            <h3>{b.cofrinho.title}</h3>
+          </div>
+          <ul class="fila" data-fila>
+            {
+              b.cofrinho.items.map((it) => (
+                <li>
+                  <div class="fila-row">
+                    <span>{it.name}</span>
+                    <span class="mono" data-when></span>
+                  </div>
+                  <div class="fila-bar">
+                    <span data-bar />
+                  </div>
+                </li>
+              ))
+            }
+          </ul>
+          <div class="aporte">
+            <label for="aporte">{b.cofrinho.label}: <strong data-aporte></strong></label>
+            <input id="aporte" type="range" min="20" max="300" step="10" value="100" />
+            <p class="note">{b.cofrinho.note}</p>
+          </div>
+        </article>
+
+        <article class="tile t-moo">
+          <video class="moo-video" src="/media/mooluscos.mp4" poster="/media/mooluscos.webp" muted loop playsinline preload="none" data-autoplay aria-label={b.moo.title}></video>
+          <div class="moo-text">
+            <p class="tag">{b.moo.tag}</p>
+            <h3>{b.moo.title}</h3>
+            <p>{b.moo.body}</p>
+            <a class="tile-link" href="https://mooluscos-filmes.vercel.app/" rel="noopener">{b.moo.link} ↗</a>
+          </div>
+        </article>
+
+        <article class="tile t-small">
+          <p class="tag">{b.reactify.tag}</p>
+          <h3>{b.reactify.title}</h3>
+          <p>{b.reactify.body}</p>
+          <a class="tile-link" href={`${GITHUB}/Reactify`}>{b.reactify.link} ↗</a>
+        </article>
+
+        <article class="tile t-small">
+          <p class="tag">{b.educa.tag}</p>
+          <h3>{b.educa.title}</h3>
+          <p>{b.educa.body}</p>
+          <a class="tile-link" href={`${GITHUB}/EducaTech`}>{b.educa.link} ↗</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="casos" class="section wrap">
+      <p class="kicker">{t.cases.kicker}</p>
+      <h2>{t.cases.title}</h2>
+      <div class="cases">
+        {
+          t.cases.items.map((c) => (
+            <article class="case" id={c.id}>
+              <header>
+                <span class="n">{c.n}</span>
+                <div>
+                  <h3>{c.title}</h3>
+                  <p class="sub">{c.sub}</p>
+                </div>
+              </header>
+              <dl>
+                <div>
+                  <dt>{t.cases.labels.problem}</dt>
+                  <dd>{c.problem}</dd>
+                </div>
+                <div>
+                  <dt>{t.cases.labels.decisions}</dt>
+                  <dd>
+                    <ul>
+                      {c.decisions.map((d) => <li>{d}</li>)}
+                    </ul>
+                  </dd>
+                </div>
+                <div>
+                  <dt>{t.cases.labels.stack}</dt>
+                  <dd class="mono">{c.stack}</dd>
+                </div>
+                <div>
+                  <dt>{t.cases.labels.status}</dt>
+                  <dd>
+                    {c.status}
+                    {c.links.map((l) => (
+                      <a class="case-link" href={l.href}>{l.label} ↗</a>
+                    ))}
+                  </dd>
+                </div>
+              </dl>
+            </article>
+          ))
+        }
+      </div>
+    </section>
+
+    <section id="experiencia" class="section wrap">
+      <p class="kicker">{t.experience.kicker}</p>
+      <h2>{t.experience.title}</h2>
+      <ol class="timeline">
+        {
+          t.experience.items.map((e) => (
+            <li>
+              <span class="when mono">{e.when}</span>
+              <div>
+                <h3>{e.role}</h3>
+                <p class="org">{e.org}</p>
+                {e.body && <p>{e.body}</p>}
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section id="sobre" class="section wrap about">
+      <div>
+        <p class="kicker">{t.about.kicker}</p>
+        <h2>{t.about.title}</h2>
+        {t.about.body.map((p) => <p class="prose">{p}</p>)}
+      </div>
+      <dl class="facts">
+        {
+          t.about.facts.map((f) => (
+            <div>
+              <dt>{f.k}</dt>
+              <dd>{f.v}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </section>
+  </main>
+
+  <footer id="contato" class="contact">
+    <div class="wrap">
+      <p class="kicker">{t.contact.kicker}</p>
+      <h2>{t.contact.title}</h2>
+      <p class="prose">{t.contact.body}</p>
+      <div class="cta">
+        <a class="btn solid inv" href={`mailto:${EMAIL}`}>{t.contact.email}</a>
+        <a class="btn inv" href={LINKEDIN}>LinkedIn</a>
+        <a class="btn inv" href={GITHUB}>GitHub</a>
+      </div>
+      <p class="foot mono">
+        © 2026 Kevin Macfadem · <a href={`${GITHUB}/macfadem.github.io`}>{t.footer}</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Trilho lateral: acompanha a rolagem.
+    const rail = document.querySelector<HTMLElement>('.rail span');
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const max = document.documentElement.scrollHeight - window.innerHeight;
+        const p = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+        if (rail) rail.style.transform = `scaleY(${p})`;
+        ticking = false;
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Cofrinho: a fila enche na ordem; cada item sai na semana em que o saldo alcança a soma até ele.
+    document.querySelectorAll<HTMLElement>('[data-cofrinho]').forEach((el) => {
+      const items: { name: string; price: number }[] = JSON.parse(el.dataset.items ?? '[]');
+      const week = el.dataset.week ?? '';
+      const money = new Intl.NumberFormat(el.dataset.lang, { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+      const input = el.querySelector<HTMLInputElement>('input[type=range]');
+      const out = el.querySelector<HTMLElement>('[data-aporte]');
+      const rows = [...el.querySelectorAll<HTMLElement>('[data-fila] li')];
+      const render = () => {
+        if (!input) return;
+        const aporte = Number(input.value);
+        if (out) out.textContent = money.format(aporte);
+        let sum = 0;
+        const weeks = items.map((it) => Math.ceil((sum += it.price) / aporte));
+        const last = weeks[weeks.length - 1] || 1;
+        rows.forEach((row, i) => {
+          const when = row.querySelector<HTMLElement>('[data-when]');
+          const bar = row.querySelector<HTMLElement>('[data-bar]');
+          if (when) when.textContent = `${money.format(items[i].price)} · ${week} ${weeks[i]}`;
+          if (bar) bar.style.width = `${Math.max(6, (weeks[i] / last) * 100)}%`;
+        });
+      };
+      input?.addEventListener('input', render);
+      render();
+    });
+
+    // Pipeline: abas com setas do teclado.
+    document.querySelectorAll<HTMLElement>('[data-asc]').forEach((el) => {
+      const tabs = [...el.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+      const panel = el.querySelector<HTMLElement>('[role=tabpanel]');
+      const select = (i: number, focus = false) => {
+        tabs.forEach((tab, k) => {
+          tab.setAttribute('aria-selected', String(k === i));
+          tab.tabIndex = k === i ? 0 : -1;
+        });
+        if (panel) {
+          panel.textContent = tabs[i].dataset.text ?? '';
+          panel.setAttribute('aria-labelledby', tabs[i].id);
+        }
+        if (focus) tabs[i].focus();
+      };
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => select(i));
+        tab.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') select((i + 1) % tabs.length, true);
+          if (e.key === 'ArrowLeft') select((i - 1 + tabs.length) % tabs.length, true);
+        });
+      });
+    });
+
+    // Vídeo: só toca quando aparece na tela, e nunca com "reduzir movimento".
+    document.querySelectorAll<HTMLVideoElement>('video[data-autoplay]').forEach((v) => {
+      if (reduce) {
+        v.controls = true;
+        return;
+      }
+      new IntersectionObserver(
+        (entries) => {
+          entries.forEach((en) => {
+            if (en.isIntersecting) v.play().catch(() => (v.controls = true));
+            else v.pause();
+          });
+        },
+        { threshold: 0.35 },
+      ).observe(v);
+    });
+  </script>
+</Base>
