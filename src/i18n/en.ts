@@ -186,7 +186,7 @@ export const en: Dict = {
         body: 'Automated credit-analysis systems and scoring algorithms with Python, JavaScript and Retool, on PostgreSQL.',
       },
       {
-        when: 'Apr — Oct 2023',
+        when: 'May — Aug 2023',
         role: 'Undergraduate volunteer',
         org: 'CI-IA · Center for Innovation in AI for Health (UFMG)',
         body: '',
@@ -201,7 +201,7 @@ export const en: Dict = {
       'I have already combined both in a research project on post-COVID functional status and quality of life in Mariana, Brazil, where I structured the study database. The project received the university’s Academic Relevance distinction.',
     ],
     facts: [
-      { k: 'Languages', v: 'Portuguese, fluent English, Spanish, basic German' },
+      { k: 'Languages', v: 'Portuguese, fluent English, basic Spanish and German' },
       { k: 'Where', v: 'Belo Horizonte, Brazil · remote or hybrid' },
       { k: 'Tools', v: 'Python, TypeScript, SQL, TensorFlow, Next.js, PostgreSQL' },
     ],

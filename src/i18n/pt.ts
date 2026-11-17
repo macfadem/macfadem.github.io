@@ -184,7 +184,7 @@ export const pt = {
         body: 'Sistemas automatizados de análise de crédito e algoritmos de pontuação com Python, JavaScript e Retool, sobre PostgreSQL.',
       },
       {
-        when: 'abr — out 2023',
+        when: 'mai — ago 2023',
         role: 'Voluntário de graduação',
         org: 'CI-IA · Centro de Inovação em IA para a Saúde (UFMG)',
         body: '',
@@ -199,7 +199,7 @@ export const pt = {
       'Já juntei as duas áreas numa pesquisa sobre funcionalidade e qualidade de vida pós-COVID em Mariana (MG), em que estruturei o banco de dados do estudo. O projeto recebeu a distinção de Relevância Acadêmica da universidade.',
     ],
     facts: [
-      { k: 'Idiomas', v: 'Português, inglês fluente, espanhol, alemão básico' },
+      { k: 'Idiomas', v: 'Português, inglês fluente, espanhol e alemão básicos' },
       { k: 'Onde', v: 'Belo Horizonte, MG · remoto ou híbrido' },
       { k: 'Ferramentas', v: 'Python, TypeScript, SQL, TensorFlow, Next.js, PostgreSQL' },
     ],
