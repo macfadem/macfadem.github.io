@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Pulse from './Pulse.astro';
 import type { Dict } from '../i18n/pt';
 
 interface Props {
@@ -15,7 +16,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 ---
 
 <Base t={t}>
-  <div class="rail" aria-hidden="true"><span></span></div>
+  <div class="rail" aria-hidden="true"><span></span><i></i></div>
 
   <header class="top wrap">
     <a class="brand" href={t.path}>kevin macfadem</a>
@@ -44,25 +45,38 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
       <svg class="line wide" viewBox="0 0 1440 260" aria-hidden="true">
         <path
+          class="trace"
           pathLength="1"
-          d="M0,140 L110,140 Q122,124 134,140 L150,140 L156,152 L168,50 L180,172 L188,140 L208,140 Q226,112 244,140 L290,140 Q302,124 314,140 L330,140 L336,152 L348,50 L360,172 L368,140 L388,140 Q406,112 424,140 L520,140 L520,80 L640,80 L640,200 L760,200 L760,140 L880,140 L880,80 L960,80 L960,50 C1040,160 1130,208 1440,220"
+          d="M0,150 L110,150 Q122,134 134,150 L150,150 L156,162 L168,60 L180,182 L188,150 L208,150 Q226,122 244,150 L290,150 Q302,134 314,150 L330,150 L336,162 L348,60 L360,182 L368,150 L388,150 Q406,122 424,150 L500,150 L500,122 L640,122 L640,94 L780,94 L780,66 L900,66 L910,76 L920,20 L932,96 L940,66 L980,66 C1100,60 1260,40 1420,22"
+        ></path>
+        <path
+          class="spark"
+          pathLength="1"
+          d="M0,150 L110,150 Q122,134 134,150 L150,150 L156,162 L168,60 L180,182 L188,150 L208,150 Q226,122 244,150 L290,150 Q302,134 314,150 L330,150 L336,162 L348,60 L360,182 L368,150 L388,150 Q406,122 424,150 L500,150 L500,122 L640,122 L640,94 L780,94 L780,66 L900,66 L910,76 L920,20 L932,96 L940,66 L980,66 C1100,60 1260,40 1420,22"
         ></path>
         <g>
-          <circle cx="580" cy="80" r="9"></circle>
-          <circle cx="700" cy="200" r="9"></circle>
-          <circle cx="820" cy="140" r="9"></circle>
-          <circle cx="920" cy="80" r="9"></circle>
+          <circle cx="570" cy="122" r="9"></circle>
+          <circle cx="710" cy="94" r="9"></circle>
+          <circle cx="840" cy="66" r="9"></circle>
         </g>
+        <circle class="end" cx="1420" cy="22" r="9"></circle>
       </svg>
       <svg class="line narrow" viewBox="0 0 390 150" aria-hidden="true">
         <path
+          class="trace"
           pathLength="1"
-          d="M0,80 L30,80 Q36,72 42,80 L50,80 L53,86 L60,30 L67,98 L71,80 L82,80 Q91,66 100,80 L130,80 L130,50 L190,50 L190,110 L250,110 L250,60 C290,120 330,132 390,138"
+          d="M0,86 L30,86 Q36,78 42,86 L50,86 L53,92 L60,34 L67,104 L71,86 L82,86 Q91,72 100,86 L130,86 L130,70 L190,70 L190,54 L250,54 L250,38 L300,38 L303,44 L309,14 L315,52 L319,38 L330,38 C350,34 370,28 384,22"
+        ></path>
+        <path
+          class="spark"
+          pathLength="1"
+          d="M0,86 L30,86 Q36,78 42,86 L50,86 L53,92 L60,34 L67,104 L71,86 L82,86 Q91,72 100,86 L130,86 L130,70 L190,70 L190,54 L250,54 L250,38 L300,38 L303,44 L309,14 L315,52 L319,38 L330,38 C350,34 370,28 384,22"
         ></path>
         <g>
-          <circle cx="160" cy="50" r="6"></circle>
-          <circle cx="220" cy="110" r="6"></circle>
+          <circle cx="160" cy="70" r="6"></circle>
+          <circle cx="220" cy="54" r="6"></circle>
         </g>
+        <circle class="end" cx="384" cy="22" r="6"></circle>
       </svg>
 
       <ol class="stops wrap">
@@ -258,6 +272,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     </section>
 
     <section id="experiencia" class="section wrap">
+      <Pulse />
       <p class="kicker">{t.experience.kicker}</p>
       <h2>{t.experience.title}</h2>
       <ol class="timeline">
@@ -277,6 +292,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     </section>
 
     <section id="sobre" class="section wrap about">
+      <Pulse />
       <div>
         <p class="kicker">{t.about.kicker}</p>
         <h2>{t.about.title}</h2>
@@ -297,6 +313,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
   <footer id="contato" class="contact">
     <div class="wrap">
+      <Pulse dark />
       <p class="kicker">{t.contact.kicker}</p>
       <h2>{t.contact.title}</h2>
       <p class="prose">{t.contact.body}</p>
@@ -315,19 +332,31 @@ const pad = (n: number) => String(n).padStart(2, '0');
   <script>
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Trilho lateral: acompanha a rolagem.
+    // Trilho lateral e linhas de batimento: acompanham a rolagem.
     const rail = document.querySelector<HTMLElement>('.rail span');
+    const railEl = document.querySelector<HTMLElement>('.rail');
+    const scrub = [...document.querySelectorAll<SVGElement>('[data-scrub]')];
+    const clamp = (n: number) => Math.min(1, Math.max(0, n));
     let ticking = false;
     const onScroll = () => {
       if (ticking) return;
       ticking = true;
       requestAnimationFrame(() => {
         const max = document.documentElement.scrollHeight - window.innerHeight;
-        const p = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+        const p = max > 0 ? clamp(window.scrollY / max) : 0;
         if (rail) rail.style.transform = `scaleY(${p})`;
+        railEl?.style.setProperty('--p', String(p));
+        const vh = window.innerHeight;
+        scrub.forEach((el) => {
+          const r = el.getBoundingClientRect();
+          // começa a desenhar quando entra na tela e fecha antes do fim da página
+          const d = reduce ? 0 : 1 - clamp((vh * 0.98 - r.top) / (vh * 0.34));
+          el.style.setProperty('--d', String(d));
+        });
         ticking = false;
       });
     };
+    window.addEventListener('resize', onScroll, { passive: true });
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
 
