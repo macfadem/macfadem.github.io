@@ -1,0 +1,22 @@
+---
+// Linha de batimento que se desenha conforme a rolagem (ver script em Page.astro).
+interface Props {
+  dark?: boolean;
+}
+const { dark = false } = Astro.props;
+---
+
+<div class={`pulse${dark ? ' dark' : ''}`} aria-hidden="true">
+  <svg class="wide" viewBox="0 0 1200 56" data-scrub>
+    <path
+      pathLength="1"
+      d="M0,34 L250,34 Q262,26 274,34 L290,34 L296,42 L308,6 L320,50 L328,34 L350,34 Q368,18 386,34 L700,34 L706,42 L718,6 L730,50 L738,34 L760,34 Q778,18 796,34 L840,34 C960,34 1080,22 1200,12"
+    ></path>
+  </svg>
+  <svg class="narrow" viewBox="0 0 390 56" data-scrub>
+    <path
+      pathLength="1"
+      d="M0,34 L60,34 Q68,26 76,34 L88,34 L93,42 L101,8 L109,50 L115,34 L130,34 Q142,20 154,34 L220,34 L225,42 L233,8 L241,50 L247,34 L280,34 C320,34 355,24 390,14"
+    ></path>
+  </svg>
+</div>
