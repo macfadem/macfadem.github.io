@@ -14,20 +14,20 @@ export const pt = {
   skip: 'Pular para o conteúdo',
   hero: {
     eyebrow: 'Software · Inteligência artificial · Medicina',
-    title: ['Do batimento', 'ao modelo.'],
-    lead: 'Sou Kevin Macfadem, estudante de Medicina (UFMG) e de Ciência da Computação. Uma linha só liga o que eu estudo ao que eu construo.',
+    title: ['Estudo medicina.', 'Construo software.'],
+    lead: 'Sou Kevin Macfadem, interno de Medicina na UFMG e estudante de Ciência da Computação. Faço sites, produtos web e modelos de IA, e levo para eles o que aprendo no hospital.',
     cta: 'Ver projetos',
     cta2: 'Currículo (PDF)',
     stops: [
-      { k: '01 — Sinal', t: 'Medicina na UFMG', href: '#sobre' },
-      { k: '02 — Pipeline', t: 'Acompanhe Seu Candidato', href: '#acompanhe-seu-candidato' },
-      { k: '03 — Curva de treino', t: 'Raio-X de tórax com CNN', href: '#raio-x' },
+      { k: '01 — Site + painel', t: 'Mooluscos Filmes', href: '#mooluscos' },
+      { k: '02 — Dados abertos', t: 'Acompanhe Seu Candidato', href: '#acompanhe-seu-candidato' },
+      { k: '03 — IA em saúde', t: 'Raio-X de tórax com CNN', href: '#raio-x' },
     ],
   },
   projects: {
     kicker: 'Projetos',
     title: 'Seis projetos, cada um funcionando',
-    lead: 'Em todos dá para ver o projeto rodando. Em dois deles, você mexe aqui mesmo.',
+    lead: 'Em todos dá para ver o projeto rodando. Em três deles, você mexe aqui mesmo.',
     labels: {
       project: 'Projeto',
       problem: 'Problema',
@@ -38,8 +38,52 @@ export const pt = {
       tryIt: 'Experimente',
       result: 'Resultado',
       more: 'Outros projetos',
+      features: 'O que o Lucas muda sozinho',
     },
     main: [
+      {
+        id: 'mooluscos',
+        widget: 'moo',
+        name: 'Mooluscos Filmes',
+        kind: 'Site para cliente · painel de edição',
+        sub: 'Site de uma produtora de vídeo de São Paulo, com um painel para o dono trocar filmes, fotos e textos sozinho, sem tocar em código.',
+        media: {
+          video: '',
+          image: '/media/mooluscos-site.webp',
+          alt: 'Abertura do site da Mooluscos Filmes, com o vídeo do reel ao fundo e o título em letras grandes.',
+          caption: '',
+        },
+        embed: {
+          note: 'Cópia de demonstração, ao vivo. Mexa à vontade: nada do que você mudar no painel vai para o site de verdade.',
+          open: 'Abrir em tela cheia',
+          load: 'Clique para usar',
+          frames: [
+            { key: 'site', label: 'O site', url: 'https://mooluscos-filmes.vercel.app/', poster: '/media/mooluscos-site.webp', title: 'Site da Mooluscos Filmes (cópia de demonstração)' },
+            { key: 'admin', label: 'O painel de edição', url: 'https://mooluscos-filmes.vercel.app/admin/', poster: '/media/mooluscos-admin.webp', title: 'Painel de edição da Mooluscos Filmes (modo de demonstração)' },
+          ],
+        },
+        features: [
+          'Reordena filmes, fotos e trabalhos de pós arrastando; oculta, edita ou exclui vários de uma vez.',
+          'Adiciona um filme colando o link do Vimeo ou do YouTube.',
+          'Envia fotos e capas: o próprio navegador reduz e converte para WebP.',
+          'Troca o vídeo do topo e escreve a legenda de cada trecho.',
+          'Edita textos, contato, marcas e prêmios.',
+          'Escolhe a cor de destaque, com aviso quando a leitura fica ruim.',
+          'Publica com a lista do que mudou, Desfazer em cada item e histórico com Restaurar.',
+        ],
+        problem:
+          'O Lucas, diretor da produtora, precisava de um site à altura do trabalho dele e de autonomia para atualizar o portfólio sem me chamar a cada filme novo.',
+        decisions: [
+          'Conteúdo separado do código: tudo o que o painel edita fica num único arquivo JSON, e a página é montada a partir dele.',
+          'A prévia é o site: o painel monta a página com o mesmo código do build, e um teste garante que as duas montagens saem iguais.',
+          'O GitHub faz as vezes de banco de dados: cada publicação vira um commit, então o histórico e o Restaurar vêm junto.',
+          'Login sem senha: o painel fica atrás do Cloudflare Access, com código por e-mail, e o servidor confere o token a cada pedido.',
+          'Vídeo do topo leve: começa pela versão mais leve e só troca por uma melhor se a tela e a conexão pedirem.',
+        ],
+        stack: 'HTML, CSS e JavaScript sem framework · Python (build) · Cloudflare Workers e Access · API do GitHub · testes com Node',
+        status: 'Publicado na Cloudflare, com o painel funcionando. Aqui está uma cópia de demonstração.',
+        links: [{ label: 'Abrir o site', href: 'https://mooluscos-filmes.vercel.app/' }],
+      },
       {
         id: 'acompanhe-seu-candidato',
         widget: 'asc',
@@ -110,6 +154,15 @@ export const pt = {
         links: [{ label: 'Repositório', href: 'https://github.com/macfadem/cofrinho' }],
       },
     ],
+    moo: {
+      title: 'Do painel ao site no ar',
+      steps: [
+        { k: 'Edita', t: 'O Lucas entra com um código enviado por e-mail e mexe no conteúdo. As mudanças ficam guardadas no navegador dele até publicar.' },
+        { k: 'Prévia', t: 'A prévia monta a página com o mesmo código do site, então o que ele vê é exatamente o que vai ao ar.' },
+        { k: 'Publica', t: 'Um servidor na Cloudflare confere o login e grava o conteúdo, a página e os arquivos novos no GitHub, num commit só.' },
+        { k: 'No ar', t: 'Cada commit publica o site de novo. Em cerca de um minuto a mudança está no ar, e qualquer versão anterior pode ser restaurada.' },
+      ],
+    },
     asc: {
       title: 'O caminho de uma votação',
       steps: [
@@ -138,15 +191,6 @@ export const pt = {
       ],
     },
     small: [
-      {
-        name: 'Mooluscos Filmes',
-        kind: 'Site para cliente',
-        body: 'Site de uma produtora de vídeo: página única com o reel em destaque, galeria de fotos e contato.',
-        video: '/media/mooluscos.mp4',
-        image: '/media/mooluscos.webp',
-        alt: 'Gravação do site da Mooluscos Filmes sendo rolado, da abertura com vídeo até o rodapé.',
-        link: { label: 'Abrir o site', href: 'https://mooluscos-filmes.vercel.app/' },
-      },
       {
         name: 'Reactify',
         kind: 'App web · API do Spotify',

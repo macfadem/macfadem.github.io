@@ -32,7 +32,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
     <section class="hero">
       <div class="wrap">
         <p class="eyebrow">{t.hero.eyebrow}</p>
-        <h1>{t.hero.title[0]}<br />{t.hero.title[1]}</h1>
+        <h1><span>{t.hero.title[0]}</span> <span>{t.hero.title[1]}</span></h1>
         <div class="hero-row">
           <p class="lead">{t.hero.lead}</p>
           <div class="cta">
@@ -96,6 +96,34 @@ const pad = (n: number) => String(n).padStart(2, '0');
                 <p class="sub">{p.sub}</p>
               </header>
 
+              {p.embed ? (
+                <div class="media embed" data-embed>
+                  <div class="embed-bar">
+                    <div class="seg" role="tablist" aria-label={p.name}>
+                      {p.embed.frames.map((f, k) => (
+                        <button type="button" role="tab" id={`${p.id}-frame-tab-${k}`} aria-controls={`${p.id}-frame-${k}`} aria-selected={k === 0 ? 'true' : 'false'} tabindex={k === 0 ? 0 : -1} data-url={f.url}>
+                          {f.label}
+                        </button>
+                      ))}
+                    </div>
+                    <a class="embed-open" href={p.embed.frames[0].url} target="_blank" rel="noopener" data-open>
+                      {p.embed.open} ↗
+                    </a>
+                  </div>
+                  <div class="embed-stage" data-stage>
+                    {p.embed.frames.map((f, k) => (
+                      <div class="embed-frame" id={`${p.id}-frame-${k}`} role="tabpanel" aria-labelledby={`${p.id}-frame-tab-${k}`} hidden={k !== 0}>
+                        <img class="poster" src={f.poster} alt="" loading="lazy" decoding="async" />
+                        <iframe data-src={f.url} title={f.title} allow="autoplay; fullscreen; clipboard-write" referrerpolicy="strict-origin-when-cross-origin" tabindex="-1"></iframe>
+                      </div>
+                    ))}
+                    <button type="button" class="embed-cover" data-cover>
+                      <span>{p.embed.load}</span>
+                    </button>
+                  </div>
+                  <p class="embed-note">{p.embed.note}</p>
+                </div>
+              ) : (
               <figure class="media">
                 {p.media.video ? (
                   <video src={p.media.video} poster={p.media.image} muted loop playsinline preload="none" data-autoplay aria-label={p.media.alt} />
@@ -104,21 +132,22 @@ const pad = (n: number) => String(n).padStart(2, '0');
                 )}
                 <figcaption>{p.media.caption}</figcaption>
               </figure>
+              )}
 
               <div class="widget">
                 <p class="tag">{p.widget === 'xray' ? L.result : L.tryIt}</p>
-                {p.widget === 'asc' && (
-                  <div data-asc>
-                    <h4>{P.asc.title}</h4>
-                    <div class="steps" role="tablist" aria-label={P.asc.title}>
-                      {P.asc.steps.map((s, k) => (
-                        <button type="button" role="tab" id={`asc-tab-${k}`} aria-controls="asc-panel" aria-selected={k === 0 ? 'true' : 'false'} tabindex={k === 0 ? 0 : -1} data-text={s.t}>
+                {(p.widget === 'asc' || p.widget === 'moo') && (
+                  <div data-steps>
+                    <h4>{P[p.widget].title}</h4>
+                    <div class="steps" role="tablist" aria-label={P[p.widget].title}>
+                      {P[p.widget].steps.map((s, k) => (
+                        <button type="button" role="tab" id={`${p.widget}-tab-${k}`} aria-controls={`${p.widget}-panel`} aria-selected={k === 0 ? 'true' : 'false'} tabindex={k === 0 ? 0 : -1} data-text={s.t}>
                           <span class="dot" />
                           {s.k}
                         </button>
                       ))}
                     </div>
-                    <p class="step-text" id="asc-panel" role="tabpanel" aria-labelledby="asc-tab-0" aria-live="polite">{P.asc.steps[0].t}</p>
+                    <p class="step-text" id={`${p.widget}-panel`} role="tabpanel" aria-labelledby={`${p.widget}-tab-0`} aria-live="polite">{P[p.widget].steps[0].t}</p>
                   </div>
                 )}
                 {p.widget === 'xray' && (
@@ -160,6 +189,15 @@ const pad = (n: number) => String(n).padStart(2, '0');
                   </div>
                 )}
               </div>
+
+              {p.features && (
+                <div class="features">
+                  <p class="tag">{L.features}</p>
+                  <ul>
+                    {p.features.map((f) => <li>{f}</li>)}
+                  </ul>
+                </div>
+              )}
 
               <details class="how">
                 <summary>{L.details}</summary>
@@ -318,8 +356,8 @@ const pad = (n: number) => String(n).padStart(2, '0');
       render();
     });
 
-    // Pipeline: abas com setas do teclado.
-    document.querySelectorAll<HTMLElement>('[data-asc]').forEach((el) => {
+    // Etapas (pipeline e painel): abas com setas do teclado.
+    document.querySelectorAll<HTMLElement>('[data-steps]').forEach((el) => {
       const tabs = [...el.querySelectorAll<HTMLButtonElement>('[role=tab]')];
       const panel = el.querySelector<HTMLElement>('[role=tabpanel]');
       const select = (i: number, focus = false) => {
@@ -340,6 +378,76 @@ const pad = (n: number) => String(n).padStart(2, '0');
           if (e.key === 'ArrowLeft') select((i - 1 + tabs.length) % tabs.length, true);
         });
       });
+    });
+
+    // Site ao vivo: carrega perto da tela, mostra a área de trabalho em escala e só captura o mouse depois de um clique.
+    document.querySelectorAll<HTMLElement>('[data-embed]').forEach((el) => {
+      const stage = el.querySelector<HTMLElement>('[data-stage]');
+      const tabs = [...el.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+      const frames = [...el.querySelectorAll<HTMLElement>('.embed-frame')];
+      const cover = el.querySelector<HTMLButtonElement>('[data-cover]');
+      const open = el.querySelector<HTMLAnchorElement>('[data-open]');
+      if (!stage) return;
+      const W = 1280;
+      const H = 800;
+      let current = 0;
+      let near = false;
+
+      const load = (i: number) => {
+        const iframe = frames[i]?.querySelector<HTMLIFrameElement>('iframe');
+        if (!iframe || iframe.src) return;
+        iframe.addEventListener('load', () => frames[i].classList.add('loaded'), { once: true });
+        iframe.src = iframe.dataset.src ?? '';
+      };
+
+      const fit = () => {
+        const w = stage.clientWidth;
+        const desk = w >= 720;
+        stage.classList.toggle('scaled', desk);
+        stage.style.setProperty('--s', String(w / W));
+        stage.style.setProperty('--w', `${W}px`);
+        stage.style.setProperty('--h', `${H}px`);
+      };
+      new ResizeObserver(fit).observe(stage);
+      fit();
+
+      const activate = () => {
+        el.classList.add('live');
+        frames[current].querySelector('iframe')?.setAttribute('tabindex', '0');
+        load(current);
+      };
+      cover?.addEventListener('click', activate);
+
+      const select = (i: number, focus = false) => {
+        current = i;
+        tabs.forEach((tab, k) => {
+          tab.setAttribute('aria-selected', String(k === i));
+          tab.tabIndex = k === i ? 0 : -1;
+        });
+        frames.forEach((f, k) => (f.hidden = k !== i));
+        if (open) open.href = tabs[i].dataset.url ?? open.href;
+        if (near || el.classList.contains('live')) load(i);
+        frames[i].querySelector('iframe')?.setAttribute('tabindex', el.classList.contains('live') ? '0' : '-1');
+        if (focus) tabs[i].focus();
+      };
+      tabs.forEach((tab, i) => {
+        tab.addEventListener('click', () => select(i));
+        tab.addEventListener('keydown', (e) => {
+          if (e.key === 'ArrowRight') select((i + 1) % tabs.length, true);
+          if (e.key === 'ArrowLeft') select((i - 1 + tabs.length) % tabs.length, true);
+        });
+      });
+
+      new IntersectionObserver(
+        (entries, obs) => {
+          if (entries.some((en) => en.isIntersecting)) {
+            near = true;
+            load(current);
+            obs.disconnect();
+          }
+        },
+        { rootMargin: '400px 0px' },
+      ).observe(stage);
     });
 
     // Vídeo: só toca quando aparece na tela, e nunca com "reduzir movimento".
