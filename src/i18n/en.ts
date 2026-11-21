@@ -16,20 +16,20 @@ export const en: Dict = {
   skip: 'Skip to content',
   hero: {
     eyebrow: 'Software · Artificial intelligence · Medicine',
-    title: ['From heartbeat', 'to model.'],
-    lead: "I'm Kevin Macfadem, a Medicine (UFMG) and Computer Science student in Brazil. A single line connects what I study to what I build.",
+    title: ['I study medicine.', 'I build software.'],
+    lead: "I'm Kevin Macfadem, a medical intern at UFMG in Brazil and a Computer Science student. I build websites, web products and AI models, and bring to them what I learn in the hospital.",
     cta: 'See projects',
     cta2: 'Résumé (PDF)',
     stops: [
-      { k: '01 — Signal', t: 'Medicine at UFMG', href: '#sobre' },
-      { k: '02 — Pipeline', t: 'Acompanhe Seu Candidato', href: '#acompanhe-seu-candidato' },
-      { k: '03 — Training curve', t: 'Chest X-ray CNN', href: '#raio-x' },
+      { k: '01 — Site + admin', t: 'Mooluscos Filmes', href: '#mooluscos' },
+      { k: '02 — Open data', t: 'Acompanhe Seu Candidato', href: '#acompanhe-seu-candidato' },
+      { k: '03 — AI in health', t: 'Chest X-ray CNN', href: '#raio-x' },
     ],
   },
   projects: {
     kicker: 'Projects',
     title: 'Six projects, each one working',
-    lead: 'You can see every project running. Two of them you can play with right here.',
+    lead: 'You can see every project running. Three of them you can play with right here.',
     labels: {
       project: 'Project',
       problem: 'Problem',
@@ -40,8 +40,52 @@ export const en: Dict = {
       tryIt: 'Try it',
       result: 'Result',
       more: 'More projects',
+      features: 'What Lucas changes on his own',
     },
     main: [
+      {
+        id: 'mooluscos',
+        widget: 'moo',
+        name: 'Mooluscos Filmes',
+        kind: 'Client website · editing panel',
+        sub: 'Website for a São Paulo video production company, with a panel the owner uses to swap films, photos and text on his own, without touching code.',
+        media: {
+          video: '',
+          image: '/media/mooluscos-site.webp',
+          alt: 'Opening of the Mooluscos Filmes website, with the reel playing behind a large headline.',
+          caption: '',
+        },
+        embed: {
+          note: 'Live demo copy. Click around freely: nothing you change in the panel reaches the real site.',
+          open: 'Open full screen',
+          load: 'Click to use it',
+          frames: [
+            { key: 'site', label: 'The website', url: 'https://mooluscos-filmes.vercel.app/', poster: '/media/mooluscos-site.webp', title: 'Mooluscos Filmes website (demo copy)' },
+            { key: 'admin', label: 'The editing panel', url: 'https://mooluscos-filmes.vercel.app/admin/', poster: '/media/mooluscos-admin.webp', title: 'Mooluscos Filmes editing panel (demo mode)' },
+          ],
+        },
+        features: [
+          'Reorders films, photos and post-production work by dragging; hides, edits or deletes several at once.',
+          'Adds a film by pasting a Vimeo or YouTube link.',
+          'Uploads photos and covers: the browser itself resizes them and converts them to WebP.',
+          'Swaps the opening video and writes the caption for each cut.',
+          'Edits text, contact details, client logos and awards.',
+          'Picks the accent color, with a warning when text becomes hard to read.',
+          'Publishes with a list of what changed, Undo on each item and a history with Restore.',
+        ],
+        problem:
+          'Lucas, the company’s director, needed a website that matched his work and the freedom to update his portfolio without calling me for every new film.',
+        decisions: [
+          'Content apart from code: everything the panel edits lives in a single JSON file, and the page is built from it.',
+          'The preview is the site: the panel builds the page with the same code as the build, and a test checks that both come out identical.',
+          'GitHub as the database: every publish is a commit, so history and Restore come for free.',
+          'Passwordless login: the panel sits behind Cloudflare Access with an emailed code, and the server checks the token on every request.',
+          'A light opening video: it starts with the lightest version and only upgrades when the screen and connection call for it.',
+        ],
+        stack: 'Plain HTML, CSS and JavaScript · Python (build) · Cloudflare Workers and Access · GitHub API · Node tests',
+        status: 'Published on Cloudflare with the panel working. This is a demo copy.',
+        links: [{ label: 'Open the site', href: 'https://mooluscos-filmes.vercel.app/' }],
+      },
       {
         id: 'acompanhe-seu-candidato',
         widget: 'asc',
@@ -112,6 +156,15 @@ export const en: Dict = {
         links: [{ label: 'Repository', href: 'https://github.com/macfadem/cofrinho' }],
       },
     ],
+    moo: {
+      title: 'From the panel to the live site',
+      steps: [
+        { k: 'Edit', t: 'Lucas signs in with a code sent by email and edits the content. Changes stay in his browser until he publishes.' },
+        { k: 'Preview', t: 'The preview builds the page with the same code as the site, so what he sees is exactly what goes live.' },
+        { k: 'Publish', t: 'A server on Cloudflare checks the login and writes the content, the page and any new files to GitHub in a single commit.' },
+        { k: 'Live', t: 'Every commit redeploys the site. About a minute later the change is live, and any earlier version can be restored.' },
+      ],
+    },
     asc: {
       title: 'The path of a vote',
       steps: [
@@ -140,15 +193,6 @@ export const en: Dict = {
       ],
     },
     small: [
-      {
-        name: 'Mooluscos Filmes',
-        kind: 'Client website',
-        body: 'Website for a film production company: a single page with the reel up front, a photo gallery and contact.',
-        video: '/media/mooluscos.mp4',
-        image: '/media/mooluscos.webp',
-        alt: 'Recording of the Mooluscos Filmes site being scrolled, from the video opening to the footer.',
-        link: { label: 'Open the site', href: 'https://mooluscos-filmes.vercel.app/' },
-      },
       {
         name: 'Reactify',
         kind: 'Web app · Spotify API',
