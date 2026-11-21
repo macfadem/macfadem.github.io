@@ -28,8 +28,7 @@ export const en: Dict = {
   },
   projects: {
     kicker: 'Projects',
-    title: 'Six projects, each one working',
-    lead: 'You can see every project running. Three of them you can play with right here.',
+    title: 'Selected projects',
     labels: {
       project: 'Project',
       problem: 'Problem',
@@ -48,7 +47,7 @@ export const en: Dict = {
         widget: 'moo',
         name: 'Mooluscos Filmes',
         kind: 'Client website · editing panel',
-        sub: 'Website for a São Paulo video production company, with a panel the owner uses to swap films, photos and text on his own, without touching code.',
+        sub: 'I built the website and editing panel Lucas uses to update films, photos and copy for Mooluscos Filmes, a São Paulo production company.',
         media: {
           video: '',
           image: '/media/mooluscos-site.webp',
@@ -56,12 +55,11 @@ export const en: Dict = {
           caption: '',
         },
         embed: {
-          note: 'Live demo copy. Click around freely: nothing you change in the panel reaches the real site.',
+          note: 'In this demo, edits stay in your browser.',
           open: 'Open full screen',
-          load: 'Click to use it',
           frames: [
-            { key: 'site', label: 'The website', url: 'https://mooluscos-filmes.vercel.app/', poster: '/media/mooluscos-site.webp', title: 'Mooluscos Filmes website (demo copy)' },
-            { key: 'admin', label: 'The editing panel', url: 'https://mooluscos-filmes.vercel.app/admin/', poster: '/media/mooluscos-admin.webp', title: 'Mooluscos Filmes editing panel (demo mode)' },
+            { key: 'site', prompt: 'Explore the site', label: 'The website', url: 'https://mooluscos-filmes.vercel.app/', poster: '/media/mooluscos-site.webp', title: 'Mooluscos Filmes website (demo copy)' },
+            { key: 'admin', prompt: 'Try changing a film cover', label: 'The editing panel', url: 'https://mooluscos-filmes.vercel.app/admin/', poster: '/media/mooluscos-admin.webp', title: 'Mooluscos Filmes editing panel (demo mode)' },
           ],
         },
         features: [
@@ -84,7 +82,7 @@ export const en: Dict = {
         ],
         stack: 'Plain HTML, CSS and JavaScript · Python (build) · Cloudflare Workers and Access · GitHub API · Node tests',
         status: 'Published on Cloudflare with the panel working. This is a demo copy.',
-        links: [{ label: 'Open the site', href: 'https://mooluscos-filmes.vercel.app/' }],
+        links: [{ label: 'Try the editing panel', href: 'https://mooluscos-filmes.vercel.app/admin/' }],
       },
       {
         id: 'acompanhe-seu-candidato',
@@ -108,7 +106,7 @@ export const en: Dict = {
         ],
         stack: 'TypeScript · Next.js · PostgreSQL (Supabase, with RLS) · GitHub Actions · 24 test files',
         status: 'In progress, open source (MIT). The collection pipeline is done and checked against real data.',
-        links: [{ label: 'Repository', href: 'https://github.com/macfadem/acompanhe-seu-candidato' }],
+        links: [{ label: 'Explore the data collection code', href: 'https://github.com/macfadem/acompanhe-seu-candidato/tree/main/packages/pipeline' }],
       },
       {
         id: 'raio-x',
@@ -119,7 +117,7 @@ export const en: Dict = {
         media: {
           video: '',
           image: '/media/raiox.webp',
-          alt: 'A chest X-ray correctly classified as COVID by the model, next to the chart of training and validation accuracy per epoch.',
+          alt: 'Example radiograph and a chart of training and validation accuracy across five epochs.',
           caption: 'Notebook output: a scan classified by the model and the accuracy curve.',
         },
         problem:
@@ -127,11 +125,11 @@ export const en: Dict = {
         decisions: [
           'A small network trained from scratch: three convolutional layers (32, 64, 64) on 299×299 grayscale images.',
           'Result: 94.4% validation accuracy on a public Kaggle dataset.',
-          'Next version: an independent test set, per-class precision and recall, and Grad-CAM to show where the model looks.',
+          'A follow-up evaluation needs an independent, patient-level test set.',
         ],
         stack: 'Python · TensorFlow · scikit-learn · NumPy · Matplotlib',
-        status: 'First version published. The second will run right here, in the browser.',
-        links: [{ label: 'Repository', href: 'https://github.com/macfadem/xray-covid-ml-classification' }],
+        status: 'Published experiment with a notebook, training curves and per-class evaluation for new runs.',
+        links: [{ label: 'Explore the notebook results', href: 'https://github.com/macfadem/xray-covid-ml-classification/blob/main/X-Ray%20Covid%20-%20ML%20Classification.ipynb' }],
       },
       {
         id: 'cofrinho',
@@ -153,7 +151,7 @@ export const en: Dict = {
         ],
         stack: 'Next.js 16 · TypeScript · Tailwind · shadcn/ui · SQLite with Drizzle ORM · Vitest',
         status: 'In daily use, with the code open.',
-        links: [{ label: 'Repository', href: 'https://github.com/macfadem/cofrinho' }],
+        links: [{ label: 'Explore the simulator code', href: 'https://github.com/macfadem/cofrinho' }],
       },
     ],
     moo: {
@@ -166,6 +164,13 @@ export const en: Dict = {
       ],
     },
     asc: {
+      record: {
+        title: 'A recorded vote in the Chamber of Deputies',
+        date: '17 June 2026',
+        subject: 'The Chamber approved a substitute text for Bill 4,133/2023 on guidelines for industrial, technology and foreign trade policy.',
+        tally: '308 in favour · 129 against · 1 abstention',
+        source: 'Check the official vote record',
+      },
       title: 'The path of a vote',
       steps: [
         { k: 'Collect', t: 'Every day, a GitHub Actions job pulls floor votes from the open APIs of Brazil’s Chamber of Deputies and Senate.' },
@@ -179,7 +184,8 @@ export const en: Dict = {
       metricLabel: 'validation accuracy',
       classes: ['COVID-19', 'Viral pneumonia', 'Normal'],
       classesLabel: 'Three classes',
-      soon: 'Coming soon: upload an X-ray and see the model’s answer, right in the browser.',
+      split: 'I split the images at random, using 80% for training and the same 20% to monitor five epochs and calculate final accuracy.',
+      errors: 'The recorded accuracy and batch count imply 2,862 correct predictions across 3,031 images. The original run saved only aggregate results. The notebook now computes a confusion matrix and identifies the most frequent class mix-ups after each new training run.',
     },
     cofrinho: {
       title: 'When can I afford each thing?',
@@ -201,7 +207,7 @@ export const en: Dict = {
         video: '/media/reactify.mp4',
         image: '/media/reactify.webp',
         alt: 'Recording of Reactify in use.',
-        link: { label: 'Code', href: 'https://github.com/macfadem/Reactify' },
+        link: { label: 'Explore the Reactify code', href: 'https://github.com/macfadem/Reactify' },
       },
       {
         name: 'Equipa Tech',
@@ -211,7 +217,7 @@ export const en: Dict = {
         video: '',
         image: '/media/educa.webp',
         alt: 'Equipa Tech home page, with the call to request a computer for studying.',
-        link: { label: 'Code', href: 'https://github.com/macfadem/EducaTech' },
+        link: { label: 'Explore the hackathon project', href: 'https://github.com/macfadem/EducaTech' },
       },
     ],
   },

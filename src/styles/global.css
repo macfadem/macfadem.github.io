@@ -622,7 +622,7 @@ h2 {
   font-weight: 600;
 }
 
-.soon {
+.evaluation-note {
   background: rgba(243, 242, 238, 0.08);
   border-radius: 14px;
   padding: 14px 16px;
@@ -684,6 +684,15 @@ h2 {
 .note {
   font-size: 13.5px;
 }
+
+.vote-record {
+  border-top: 1px solid var(--rule);
+  padding-top: 16px;
+  display: grid;
+  gap: 8px;
+}
+
+.vote-record a { justify-self: start; }
 
 /* Pipeline */
 .steps {

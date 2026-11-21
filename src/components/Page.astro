@@ -96,7 +96,6 @@ const pad = (n: number) => String(n).padStart(2, '0');
     <section id="projetos" class="section wrap">
       <p class="kicker">{P.kicker}</p>
       <h2>{P.title}</h2>
-      <p class="section-lead">{P.lead}</p>
 
       <div class="projects">
         {
@@ -115,7 +114,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
                   <div class="embed-bar">
                     <div class="seg" role="tablist" aria-label={p.name}>
                       {p.embed.frames.map((f, k) => (
-                        <button type="button" role="tab" id={`${p.id}-frame-tab-${k}`} aria-controls={`${p.id}-frame-${k}`} aria-selected={k === 0 ? 'true' : 'false'} tabindex={k === 0 ? 0 : -1} data-url={f.url}>
+                        <button type="button" role="tab" id={`${p.id}-frame-tab-${k}`} aria-controls={`${p.id}-frame-${k}`} aria-selected={k === 0 ? 'true' : 'false'} tabindex={k === 0 ? 0 : -1} data-url={f.url} data-prompt={f.prompt}>
                           {f.label}
                         </button>
                       ))}
@@ -132,10 +131,10 @@ const pad = (n: number) => String(n).padStart(2, '0');
                       </div>
                     ))}
                     <button type="button" class="embed-cover" data-cover>
-                      <span>{p.embed.load}</span>
+                      <span>{p.embed.frames[0].prompt}</span>
                     </button>
                   </div>
-                  <p class="embed-note">{p.embed.note}</p>
+                  <p class="embed-note"><strong data-task hidden>{p.embed.frames[1].prompt}. </strong>{p.embed.note}</p>
                 </div>
               ) : (
               <figure class="media">
@@ -162,6 +161,14 @@ const pad = (n: number) => String(n).padStart(2, '0');
                       ))}
                     </div>
                     <p class="step-text" id={`${p.widget}-panel`} role="tabpanel" aria-labelledby={`${p.widget}-tab-0`} aria-live="polite">{P[p.widget].steps[0].t}</p>
+                    {p.widget === 'asc' && (
+                      <div class="vote-record">
+                        <h4>{P.asc.record.title}</h4>
+                        <p><time datetime="2026-06-17">{P.asc.record.date}</time> · {P.asc.record.subject}</p>
+                        <p><strong>{P.asc.record.tally}</strong></p>
+                        <a href="https://dadosabertos.camara.leg.br/api/v2/votacoes/2382675-97">{P.asc.record.source} ↗</a>
+                      </div>
+                    )}
                   </div>
                 )}
                 {p.widget === 'xray' && (
@@ -174,7 +181,8 @@ const pad = (n: number) => String(n).padStart(2, '0');
                     <ul class="chips">
                       {P.xray.classes.map((c) => <li>{c}</li>)}
                     </ul>
-                    <p class="soon">{P.xray.soon}</p>
+                    <p>{P.xray.split}</p>
+                    <p class="evaluation-note">{P.xray.errors}</p>
                   </div>
                 )}
                 {p.widget === 'cofrinho' && (
@@ -417,6 +425,8 @@ const pad = (n: number) => String(n).padStart(2, '0');
       const frames = [...el.querySelectorAll<HTMLElement>('.embed-frame')];
       const cover = el.querySelector<HTMLButtonElement>('[data-cover]');
       const open = el.querySelector<HTMLAnchorElement>('[data-open]');
+      const task = el.querySelector<HTMLElement>('[data-task]');
+      const coverLabel = cover?.querySelector('span');
       if (!stage) return;
       const W = 1280;
       const H = 800;
@@ -443,6 +453,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
 
       const activate = () => {
         el.classList.add('live');
+        if (task) task.hidden = current !== 1;
         frames[current].querySelector('iframe')?.setAttribute('tabindex', '0');
         load(current);
       };
@@ -456,6 +467,8 @@ const pad = (n: number) => String(n).padStart(2, '0');
         });
         frames.forEach((f, k) => (f.hidden = k !== i));
         if (open) open.href = tabs[i].dataset.url ?? open.href;
+        if (coverLabel) coverLabel.textContent = tabs[i].dataset.prompt ?? '';
+        if (task) task.hidden = i !== 1 || !el.classList.contains('live');
         if (near || el.classList.contains('live')) load(i);
         frames[i].querySelector('iframe')?.setAttribute('tabindex', el.classList.contains('live') ? '0' : '-1');
         if (focus) tabs[i].focus();

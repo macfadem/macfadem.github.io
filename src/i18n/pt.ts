@@ -26,8 +26,7 @@ export const pt = {
   },
   projects: {
     kicker: 'Projetos',
-    title: 'Seis projetos, cada um funcionando',
-    lead: 'Em todos dá para ver o projeto rodando. Em três deles, você mexe aqui mesmo.',
+    title: 'Projetos selecionados',
     labels: {
       project: 'Projeto',
       problem: 'Problema',
@@ -46,7 +45,7 @@ export const pt = {
         widget: 'moo',
         name: 'Mooluscos Filmes',
         kind: 'Site para cliente · painel de edição',
-        sub: 'Site de uma produtora de vídeo de São Paulo, com um painel para o dono trocar filmes, fotos e textos sozinho, sem tocar em código.',
+        sub: 'Desenvolvi o site e o painel que o Lucas usa para atualizar filmes, fotos e textos da Mooluscos Filmes, produtora de São Paulo.',
         media: {
           video: '',
           image: '/media/mooluscos-site.webp',
@@ -54,12 +53,11 @@ export const pt = {
           caption: '',
         },
         embed: {
-          note: 'Cópia de demonstração, ao vivo. Mexa à vontade: nada do que você mudar no painel vai para o site de verdade.',
+          note: 'Nesta demonstração, as edições ficam no seu navegador.',
           open: 'Abrir em tela cheia',
-          load: 'Clique para usar',
           frames: [
-            { key: 'site', label: 'O site', url: 'https://mooluscos-filmes.vercel.app/', poster: '/media/mooluscos-site.webp', title: 'Site da Mooluscos Filmes (cópia de demonstração)' },
-            { key: 'admin', label: 'O painel de edição', url: 'https://mooluscos-filmes.vercel.app/admin/', poster: '/media/mooluscos-admin.webp', title: 'Painel de edição da Mooluscos Filmes (modo de demonstração)' },
+            { key: 'site', prompt: 'Explorar o site', label: 'O site', url: 'https://mooluscos-filmes.vercel.app/', poster: '/media/mooluscos-site.webp', title: 'Site da Mooluscos Filmes (cópia de demonstração)' },
+            { key: 'admin', prompt: 'Experimente trocar a capa de um filme', label: 'O painel de edição', url: 'https://mooluscos-filmes.vercel.app/admin/', poster: '/media/mooluscos-admin.webp', title: 'Painel de edição da Mooluscos Filmes (modo de demonstração)' },
           ],
         },
         features: [
@@ -82,7 +80,7 @@ export const pt = {
         ],
         stack: 'HTML, CSS e JavaScript sem framework · Python (build) · Cloudflare Workers e Access · API do GitHub · testes com Node',
         status: 'Publicado na Cloudflare, com o painel funcionando. Aqui está uma cópia de demonstração.',
-        links: [{ label: 'Abrir o site', href: 'https://mooluscos-filmes.vercel.app/' }],
+        links: [{ label: 'Testar o painel', href: 'https://mooluscos-filmes.vercel.app/admin/' }],
       },
       {
         id: 'acompanhe-seu-candidato',
@@ -106,7 +104,7 @@ export const pt = {
         ],
         stack: 'TypeScript · Next.js · PostgreSQL (Supabase, com RLS) · GitHub Actions · 24 arquivos de teste',
         status: 'Em construção, com código aberto (MIT). Pipeline de coleta pronto e conferido com dados reais.',
-        links: [{ label: 'Repositório', href: 'https://github.com/macfadem/acompanhe-seu-candidato' }],
+        links: [{ label: 'Ver o código da coleta', href: 'https://github.com/macfadem/acompanhe-seu-candidato/tree/main/packages/pipeline' }],
       },
       {
         id: 'raio-x',
@@ -117,7 +115,7 @@ export const pt = {
         media: {
           video: '',
           image: '/media/raiox.webp',
-          alt: 'Um raio-X de tórax classificado corretamente como COVID pelo modelo, ao lado do gráfico de acurácia de treino e validação por época.',
+          alt: 'Exemplo de radiografia e gráfico de acurácia de treino e validação ao longo de cinco épocas.',
           caption: 'Saída do notebook: um exame classificado pelo modelo e a curva de acurácia.',
         },
         problem:
@@ -125,11 +123,11 @@ export const pt = {
         decisions: [
           'Rede pequena, treinada do zero: três camadas convolucionais (32, 64, 64) sobre imagens de 299×299 em tons de cinza.',
           'Resultado: 94,4% de acurácia na validação, num conjunto público do Kaggle.',
-          'Próxima versão: conjunto de teste independente, precisão e recall por classe e Grad-CAM, para mostrar onde o modelo olha.',
+          'Uma próxima avaliação exige um conjunto independente, separado por paciente.',
         ],
         stack: 'Python · TensorFlow · scikit-learn · NumPy · Matplotlib',
-        status: 'Primeira versão publicada. A segunda vai rodar aqui, no navegador.',
-        links: [{ label: 'Repositório', href: 'https://github.com/macfadem/xray-covid-ml-classification' }],
+        status: 'Experimento publicado com notebook, curvas de treino e avaliação por classe para novas execuções.',
+        links: [{ label: 'Explorar os resultados no notebook', href: 'https://github.com/macfadem/xray-covid-ml-classification/blob/main/X-Ray%20Covid%20-%20ML%20Classification.ipynb' }],
       },
       {
         id: 'cofrinho',
@@ -151,7 +149,7 @@ export const pt = {
         ],
         stack: 'Next.js 16 · TypeScript · Tailwind · shadcn/ui · SQLite com Drizzle ORM · Vitest',
         status: 'Em uso no dia a dia, com código aberto.',
-        links: [{ label: 'Repositório', href: 'https://github.com/macfadem/cofrinho' }],
+        links: [{ label: 'Ver o código do simulador', href: 'https://github.com/macfadem/cofrinho' }],
       },
     ],
     moo: {
@@ -164,6 +162,13 @@ export const pt = {
       ],
     },
     asc: {
+      record: {
+        title: 'Uma votação real da Câmara',
+        date: '17 de junho de 2026',
+        subject: 'O plenário aprovou o substitutivo ao PL 4.133/2023, sobre diretrizes para a política industrial, tecnológica e de comércio exterior.',
+        tally: '308 sim · 129 não · 1 abstenção',
+        source: 'Conferir o registro oficial da Câmara',
+      },
       title: 'O caminho de uma votação',
       steps: [
         { k: 'Coleta', t: 'Todo dia, um job no GitHub Actions busca as votações de plenário nas APIs abertas da Câmara e do Senado.' },
@@ -177,7 +182,8 @@ export const pt = {
       metricLabel: 'de acurácia na validação',
       classes: ['COVID-19', 'Pneumonia viral', 'Normal'],
       classesLabel: 'Três classes',
-      soon: 'Em breve: envie um raio-X e veja a resposta do modelo, direto no navegador.',
+      split: 'A divisão foi aleatória por imagem. Usei 80% para treino e os mesmos 20% para acompanhar as cinco épocas e calcular a acurácia final.',
+      errors: 'A acurácia e os lotes registrados indicam 2.862 acertos em 3.031 imagens. A execução original guardou apenas o resultado agregado. O notebook agora calcula a matriz de confusão e identifica quais classes mais se confundem a cada novo treino.',
     },
     cofrinho: {
       title: 'Quando dá para comprar cada coisa?',
@@ -199,7 +205,7 @@ export const pt = {
         video: '/media/reactify.mp4',
         image: '/media/reactify.webp',
         alt: 'Gravação do Reactify em uso.',
-        link: { label: 'Código', href: 'https://github.com/macfadem/Reactify' },
+        link: { label: 'Ver o código do Reactify', href: 'https://github.com/macfadem/Reactify' },
       },
       {
         name: 'Equipa Tech',
@@ -209,7 +215,7 @@ export const pt = {
         video: '',
         image: '/media/educa.webp',
         alt: 'Página inicial do Equipa Tech, com a chamada para solicitar um computador para estudar.',
-        link: { label: 'Código', href: 'https://github.com/macfadem/EducaTech' },
+        link: { label: 'Ver o projeto do hackathon', href: 'https://github.com/macfadem/EducaTech' },
       },
     ],
   },
