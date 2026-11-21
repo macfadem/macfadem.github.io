@@ -979,12 +979,39 @@ h2 {
   padding-inline: 6px;
 }
 
+.award {
+  align-self: flex-start;
+  margin: 12px 6px 0;
+  padding: 6px 12px 6px 10px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--on-ink);
+  font-weight: 700;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.award::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--red-soft);
+}
+
+.card .award + h4 {
+  margin-top: 10px;
+}
+
 .card h4 {
   font-weight: 800;
   font-size: 1.4rem;
   letter-spacing: -0.03em;
   margin-top: 6px;
   padding-inline: 6px;
+  line-height: 1.15;
 }
 
 .card h4 + p {

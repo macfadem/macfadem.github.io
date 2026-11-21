@@ -247,6 +247,7 @@ const pad = (n: number) => String(n).padStart(2, '0');
               <p class="tag">
                 <span class="num">{L.project} {pad(i + 1 + P.main.length)}</span> · {p.kind}
               </p>
+              {p.award && <p class="award">{p.award}</p>}
               <h4>{p.name}</h4>
               <p>{p.body}</p>
               <a class="tile-link" href={p.link.href} rel="noopener">{p.link.label} ↗</a>

@@ -195,6 +195,7 @@ export const en: Dict = {
     small: [
       {
         name: 'Reactify',
+        award: '',
         kind: 'Web app · Spotify API',
         body: 'Searches songs and builds playlists in the user’s Spotify account. React and Tailwind.',
         video: '/media/reactify.mp4',
@@ -205,6 +206,7 @@ export const en: Dict = {
       {
         name: 'Equipa Tech',
         kind: 'Potência Tech + iFood hackathon',
+        award: '2nd place at the hackathon',
         body: 'Front end of a platform that lends laptops and tablets to people who want to study online. Angular, built as a team.',
         video: '',
         image: '/media/educa.webp',
