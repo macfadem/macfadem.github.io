@@ -193,6 +193,7 @@ export const pt = {
     small: [
       {
         name: 'Reactify',
+        award: '',
         kind: 'App web · API do Spotify',
         body: 'Busca músicas e monta playlists na conta do Spotify do usuário. React e Tailwind.',
         video: '/media/reactify.mp4',
@@ -203,6 +204,7 @@ export const pt = {
       {
         name: 'Equipa Tech',
         kind: 'Hackathon Potência Tech + iFood',
+        award: '2º lugar no hackathon',
         body: 'Front-end de uma plataforma de empréstimo de notebooks e tablets para quem quer estudar online. Angular, feito em equipe.',
         video: '',
         image: '/media/educa.webp',
